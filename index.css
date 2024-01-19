@@ -1,3 +1,41 @@
-#root{
-    color: red;
+.logo{
+    width: 100px;
+    padding: 10px;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+
+.navItems > ul{
+    display: flex;
+    list-style-type: none;
+    font-size: 22px;
+}
+
+.navItems > ul > li{
+    padding:10px;
+    margin: 10px;
+}
+
+.res-card{
+    width:200px;   
+    padding:5px;
+    margin: 5px;
+    overflow-wrap: break-word;
+}
+
+.res-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+.res-logo{
+    width: 100%;
+    height: 200px;
+}
+
+.search{
+    padding: 10px;
 }
