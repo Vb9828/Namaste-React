@@ -1,11 +1,12 @@
 # Namaste-React
+
 React-Project
 
 Parcel
 
 --- Dev Build
 ---- Local Server
----- HMR ---> Hot Module Replacement ----> Automatically refreshes the browser, if any changes are made to code 
+---- HMR ---> Hot Module Replacement ----> Automatically refreshes the browser, if any changes are made to code
 
 ---- Uses File watching algorithm which is built using C++, to do the HMR.
 ---- Caching----- Faster builds as it caches the previous buids
@@ -18,4 +19,22 @@ Parcel
 ---- Diagnoistic behind the scenes
 ---- Error handling proper suggestions on screen
 ---- Parcel also provides us a way to host our app on HTTPS
----- Tree Shaking ---> Removes unused code 
+---- Tree Shaking ---> Removes unused code
+
+/\*\*
+
+- Header
+- - Logo
+- - Nav Items
+- Body
+- - Search
+- - RestaurantContainer
+- - RestaurantCard
+- - Image
+- - Name of the res, star rating, cuisines,
+- Footer
+- - Copyrights
+- - Links
+- - Address
+- - Contact
+    \*/
