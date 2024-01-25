@@ -36,7 +36,7 @@ const BodyComponent = () => {
 		<ShimmerUI />
 	) : (
 		<div className="body">
-			<div className="search">
+			<div className="search-container">
 				<input
 					type="text"
 					className="search-box"
