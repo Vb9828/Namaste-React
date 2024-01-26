@@ -1,6 +1,7 @@
 import RestroCardComponent from "./RestroCard";
 import { useState, useEffect } from "../../node_modules/react";
 import ShimmerUI from "./ShimmerUI";
+import { Link } from "react-router-dom";
 
 const BodyComponent = () => {
 	const [listOfRestaurants, setListOfRestaurants] = useState("");
@@ -22,14 +23,17 @@ const BodyComponent = () => {
 		);
 
 		const json = await data.json();
+		const requiredData = json.data.cards.filter(
+			(item) => item.card.card.id == "restaurant_grid_listing"
+		);
 
 		setListOfRestaurants(
-			json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+			requiredData[0].card.card.gridElements.infoWithStyle.restaurants
 		);
+
 		setFilteredRestaurants(
-			json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+			requiredData[0].card.card.gridElements.infoWithStyle.restaurants
 		);
-		console.log(json);
 	};
 
 	return listOfRestaurants.length === 0 ? (
@@ -68,7 +72,9 @@ const BodyComponent = () => {
 			</button>
 			<div className="res-container">
 				{filteredRestaurants.map((res) => (
-					<RestroCardComponent key={res.info.id} resData={res} />
+					<Link to={"/restaurants/" + res.info.id} key={res.info.id}>
+						<RestroCardComponent resData={res} />
+					</Link>
 				))}
 			</div>
 		</div>
