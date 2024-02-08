@@ -2,7 +2,7 @@ import RestroCardComponent from "./RestroCard";
 import { useState, useEffect } from "../../node_modules/react";
 import ShimmerUI from "./ShimmerUI";
 import { Link } from "react-router-dom";
-
+import useOnlineStatus from "../utils/useOnlineStatus";
 const BodyComponent = () => {
 	const [listOfRestaurants, setListOfRestaurants] = useState("");
 	const [searchText, setSearchText] = useState("");
@@ -36,41 +36,51 @@ const BodyComponent = () => {
 		);
 	};
 
+	const onlineStatus = useOnlineStatus();
+
+	if (onlineStatus === false) {
+		return <h1>Please check your internet connection.</h1>;
+	}
+
 	return listOfRestaurants.length === 0 ? (
 		<ShimmerUI />
 	) : (
 		<div className="body">
-			<div className="search-container">
-				<input
-					type="text"
-					className="search-box"
-					value={searchText}
-					onChange={(e) => {
-						setSearchText(e.target.value);
-					}}
-				/>
-				<button
-					className="search-btn"
-					onClick={() => {
-						const filterRes = listOfRestaurants.filter((res) =>
-							res.info.name.toLowerCase().includes(searchText.toLowerCase())
-						);
-						setFilteredRestaurants(filterRes);
-					}}>
-					Search
-				</button>
+			<div className="flex font-medium">
+				<div className=" m-4 p-4">
+					<input
+						type="text"
+						className="border border-black border-solid"
+						value={searchText}
+						onChange={(e) => {
+							setSearchText(e.target.value);
+						}}
+					/>
+					<button
+						className="m-4 px-4 py-2 bg-green-100 rounded-lg"
+						onClick={() => {
+							const filterRes = listOfRestaurants.filter((res) =>
+								res.info.name.toLowerCase().includes(searchText.toLowerCase())
+							);
+							setFilteredRestaurants(filterRes);
+						}}>
+						Search
+					</button>
+				</div>
+				<div className="m-4 p-4">
+					<button
+						className="m-4 px-4 py-2 bg-gray-100 rounded-lg"
+						onClick={() => {
+							const filteredList = listOfRestaurants.filter(
+								(res) => res.info.avgRating > 4
+							);
+							setFilteredRestaurants(filteredList);
+						}}>
+						Top Rated Restaurants
+					</button>
+				</div>
 			</div>
-			<button
-				className="filter-btn"
-				onClick={() => {
-					const filteredList = listOfRestaurants.filter(
-						(res) => res.info.avgRating > 4
-					);
-					setFilteredRestaurants(filteredList);
-				}}>
-				Top Rated Restaurants
-			</button>
-			<div className="res-container">
+			<div className="flex flex-wrap rounded-lg">
 				{filteredRestaurants.map((res) => (
 					<Link to={"/restaurants/" + res.info.id} key={res.info.id}>
 						<RestroCardComponent resData={res} />

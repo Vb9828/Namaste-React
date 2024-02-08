@@ -1,28 +1,11 @@
-import { useEffect, useState } from "react";
 import ShimmerUI from "./ShimmerUI";
 import { useParams } from "react-router-dom";
-import { MENU_URL } from "../utils/common";
+import useRestaurantMenu from "../utils/useRestaurantMenu";
+import useOnlineStatus from "../utils/useOnlineStatus";
 const RestroMenu = () => {
-	const [menuItems, setMenuItems] = useState(null);
 	const { resId } = useParams();
-	useEffect(() => {
-		fetchMenu();
-	}, []);
 
-	const fetchMenu = async () => {
-		const data = await fetch(MENU_URL + resId, {
-			headers: {
-				"x-cors-api-key": "temp_55d54ed9ec87dbe6717d51209208a1bd",
-			},
-		});
-
-		const json = await data.json();
-
-		console.log(json);
-
-		//const reqdData = json.data.cards[0].card.card.info;
-		setMenuItems(json);
-	};
+	const menuItems = useRestaurantMenu(resId);
 
 	if (menuItems === null) return <ShimmerUI />;
 	const { name, cuisines, costForTwoMessage } =
@@ -31,6 +14,12 @@ const RestroMenu = () => {
 	const { itemCards } =
 		menuItems?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]
 			?.card?.card;
+
+	const onlineStatus = useOnlineStatus();
+
+	if (onlineStatus === false) {
+		return <h1>Please check your internet connection.</h1>;
+	}
 	return menuItems === null ? (
 		<ShimmerUI />
 	) : (
