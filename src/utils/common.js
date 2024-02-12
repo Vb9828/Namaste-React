@@ -6,3 +6,6 @@ export const APP_LOGO_URL =
 
 export const MENU_URL =
 	"https://proxy.cors.sh/https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=17.480127897788517&lng=78.57794760320617&restaurantId=";
+
+export const DOWN_ICON_URL =
+	"https://cdn.iconscout.com/icon/premium/png-256-thumb/arrow-down-3-663926.png?f=webp";
