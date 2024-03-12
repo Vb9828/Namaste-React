@@ -47,6 +47,7 @@ const RestroMenu = () => {
 					}}
 					setActiveMenu={setActiveMenu}
 					activeMenu={activeMenu}
+					showIndex={showIndex}
 				/>
 			))}
 		</div>
