@@ -27,7 +27,7 @@ export const labelledComponent = (RestroCardComponent) => {
 	return (props) => {
 		return (
 			<div>
-				<label className=" absolute bg-black text-white m-2 p-2 rounded-lg">
+				<label className=" absolute bg-black text-red-500 m-2 p-2 rounded-lg">
 					Open
 				</label>
 				<RestroCardComponent {...props} />
