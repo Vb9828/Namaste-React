@@ -59,7 +59,18 @@ const Todos2 = () => {
 					onClick={addToList}>
 					Add
 				</button>
-				<div>{todoObj != null ? todoObj.todo : ""}</div>
+				<div>
+					{todoObj != null ? (
+						<ul key={todoObj.id}>
+							<li>id: {todoObj.id}</li>
+							<li>todo: {todoObj.todo}</li>
+							<li>completed: {todoObj.completed}</li>
+							<li>userId : {todoObj.userId}</li>
+						</ul>
+					) : (
+						""
+					)}
+				</div>
 				{todoList?.map((item) => {
 					return (
 						<ul key={item.id}>
