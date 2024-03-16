@@ -69,9 +69,6 @@ const Todos2 = () => {
 			</div>
 		</div>
 	);
-	<div className="m-4 p-4 items-center">
-		<div className="m-4 p-4">{todoList?.todo}</div>
-	</div>;
 };
 
 export default Todos2;
