@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 
 const Todos1 = () => {
 	const [todoList, setTodoList] = useState(null);
-	var completed, incompleteCount;
 
 	const fetchTodo = async () => {
 		const todos = await fetch("https://dummyjson.com/todos");
@@ -10,8 +9,8 @@ const Todos1 = () => {
 		setTodoList(json.todos);
 	};
 
-	completed = todoList?.filter((item) => item?.completed == true);
-	incompleteCount = todoList?.length - completed?.length;
+	var completed = todoList?.filter((item) => item?.completed == true);
+	var incompleteCount = todoList?.length - completed?.length;
 	console.log(completed?.length, incompleteCount);
 
 	useEffect(() => {
