@@ -6,7 +6,7 @@ const Todos2 = () => {
 	const [todoObj, setTodoObj] = useState(null);
 	const [input, setInput] = useState("");
 	const fetchTodo = async (id) => {
-		if (id == null) {
+		if (id) {
 			const todos = await fetch("https://dummyjson.com/todos");
 			const json = await todos.json();
 			setTodoList(json.todos);
