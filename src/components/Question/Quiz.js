@@ -1,5 +1,17 @@
 import { useState } from "react";
 
+const getBorderColor = (list, id, selected) => {
+	console.log(list, id, selected);
+	let l1 = list.map((item) => item.id);
+	if (l1.includes(id)) {
+		let obj = list.find((item) => item.id == id);
+		return obj.isCorrect ? "green" : "red";
+	}
+	return "gray";
+};
+
+let selectedList = [];
+
 const Quiz = () => {
 	let questions = [
 		{
@@ -40,16 +52,28 @@ const Quiz = () => {
 		{ id: "3", answer: "a" }, // Answer to question 3 is option 'a'
 	];
 
-	const [color, setColor] = useState(null);
-	const [selectedId, setSelectedId] = useState(null);
+	const [color, setColor] = useState("");
+	const [selectedOpt, setSelectedOpt] = useState({});
+	const [alreadySelected, setAlreadySelected] = useState(false);
 
 	const handleAnswer = (id, key) => {
-		console.log(id, key);
-		const correctAns = answers.filter((item) => id == item.id);
-		console.log(correctAns);
-		setSelectedId(id);
-		correctAns[0].answer == key ? setColor("green") : setColor("red");
+		let selectedIds = selectedList.map((item) => item.id);
+		if (!selectedIds.includes(id)) {
+			console.log(id, key);
+			const correctAns = answers.find((item) => id == item.id);
+			console.log(correctAns);
+			// correctAns.answer == key ? (isCorrect = true) : (isCorrect = false);
+			const isCorrect = correctAns.answer == key;
+			let obj = {};
+			obj.id = id;
+			obj.isCorrect = isCorrect;
+			setSelectedOpt(obj);
+			selectedList.push(obj);
+		}
 	};
+	console.log(selectedList, selectedOpt);
+
+	//calling
 	return (
 		<div>
 			{questions.map((item) => {
@@ -58,7 +82,7 @@ const Quiz = () => {
 						<div
 							style={{
 								border: "2px solid black",
-								borderColor: selectedId == item.id ? color : "",
+								borderColor: getBorderColor(selectedList, item.id, selectedOpt),
 								margin: "10px",
 								padding: "10px",
 							}}>

@@ -5,7 +5,8 @@ import BasicList from "./src/components/BasicList/BasicList";
 import Todos1 from "./src/components/Todos1.js/Todos1";
 import Todos2 from "./src/components/Todos2/Todos2";
 import Timer from "./src/components/Timer/Timer";
-import Quiz from "./src/components/Question/Question";
+import Quiz from "./src/components/Question/Quiz";
+import Calculator from "./src/components/Calculator/Calculator";
 const Appcomponent = () => {
 	return (
 		<div id="container">
@@ -13,7 +14,8 @@ const Appcomponent = () => {
 			{/* <BasicList /> */}
 			{/* <Todos2 /> */}
 			{/* <Timer /> */}
-			<Quiz />
+			{/* <Quiz /> */}
+			<Calculator />
 		</div>
 	);
 };

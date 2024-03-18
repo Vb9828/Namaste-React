@@ -2,15 +2,21 @@ import { useState, useEffect } from "react";
 
 const Timer = () => {
 	const [timer, setTimer] = useState(1);
+	//const [flag, setFlag] = useState(false);
 
 	useEffect(() => {
-		const timeout = () => {
-			setTimeout(() => {
-				setTimer(timer + 1);
+		if (timer < 10) {
+			const interval = setInterval(() => {
+				setTimer((timer) => {
+					var incrementedVal = timer + 1;
+					if (incrementedVal > 10) {
+						return clearInterval(interval);
+					}
+					return incrementedVal;
+				});
 			}, 1000);
-		};
-		return timer < 10 ? timeout() : clearTimeout(timeout);
-	}, [timer]);
+		}
+	}, []);
 
 	return (
 		<div>

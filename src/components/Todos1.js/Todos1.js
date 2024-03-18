@@ -1,33 +1,34 @@
 import { useState, useEffect } from "react";
 
 const Todos1 = () => {
-	const [todoList, setTodoList] = useState(null);
+	const [todoList, setTodoList] = useState([]); //---
 
-	const fetchTodo = async () => {
+	const fetchTodos = async () => {
+		//-----todos
 		const todos = await fetch("https://dummyjson.com/todos");
 		const json = await todos.json();
 		setTodoList(json.todos);
 	};
 
-	var completed = todoList?.filter((item) => item?.completed == true);
-	var incompleteCount = todoList?.length - completed?.length;
-	console.log(completed?.length, incompleteCount);
+	var completed = todoList.filter((item) => item.completed); //----let and ? is == true required
+	var notCompleted = todoList.filter((item) => !item.completed);
+	console.log(completed.length, notCompleted.length);
 
 	useEffect(() => {
-		fetchTodo();
+		fetchTodos();
 	}, []);
 
 	if (todoList?.length > 0) {
 		return (
 			<div className="m-4 p-4 items-center">
 				<div className="m-4 p-4">
-					No. of Completed Todos: {completed?.length}
+					No. of Completed Todos: {completed.length}
 				</div>
 				<div className="m-4 p-4">
-					No.of not completed Todos: {incompleteCount}
+					No.of not completed Todos: {notCompleted.length}
 				</div>
 				<div className="m-4 p-4">
-					{todoList?.map((item) => {
+					{todoList.map((item) => {
 						return (
 							<ul key={item?.id}>
 								<li>{item?.todo}</li>

@@ -2,28 +2,22 @@ import { useState, useEffect } from "react";
 import TodoList from "./TodoList";
 
 const Todos2 = () => {
-	const [todoList, setTodoList] = useState(null);
-	const [todoObj, setTodoObj] = useState(null);
+	const [todoList, setTodoList] = useState([]);
+	const [selectedTodo, setSelectedTodo] = useState({});
 	const [input, setInput] = useState("");
-	const fetchTodo = async (id) => {
-		if (id) {
-			const todos = await fetch("https://dummyjson.com/todos");
-			const json = await todos.json();
-			setTodoList(json.todos);
-		} else {
-			const todos = await fetch("https://dummyjson.com/todos/" + id);
-			const json = await todos.json();
-			console.log("https://dummyjson.com/todos/" + id);
-			setTodoObj(json);
-		}
+
+	const fetchTodo = async () => {
+		const todos = await fetch("https://dummyjson.com/todos");
+		const json = await todos.json();
+		setTodoList(json.todos);
 	};
 
-	// const fetchTodoById = async (id) => {
-	// 	const todos = await fetch("https://dummyjson.com/todos/" + id);
-	// 	const json = await todos.json();
-	// 	console.log("https://dummyjson.com/todos/" + id);
-	// 	setTodoObj(json);
-	// };
+	const fetchTodoById = async (id) => {
+		const todos = await fetch("https://dummyjson.com/todos/" + id);
+		const json = await todos.json();
+		console.log("https://dummyjson.com/todos/" + id);
+		setSelectedTodo(json);
+	};
 
 	const handleInput = (e) => {
 		setInput(e.target.value);
@@ -60,24 +54,22 @@ const Todos2 = () => {
 					Add
 				</button>
 				<div>
-					{todoObj != null ? (
-						<ul key={todoObj.id}>
-							<li>id: {todoObj.id}</li>
-							<li>todo: {todoObj.todo}</li>
-							<li>completed: {todoObj.completed}</li>
-							<li>userId : {todoObj.userId}</li>
+					{selectedTodo != null && (
+						<ul key={selectedTodo.id}>
+							<li>id: {selectedTodo.id}</li>
+							<li>todo: {selectedTodo.todo}</li>
+							<li>completed: {selectedTodo.completed}</li>
+							<li>userId : {selectedTodo.userId}</li>
 						</ul>
-					) : (
-						""
 					)}
 				</div>
-				{todoList?.map((item) => {
+				{todoList.map((item) => {
 					return (
 						<ul key={item.id}>
 							<li
 								className="m-2 p-2 border border-gray-50 shadow-md w-2"
 								onClick={() => {
-									fetchTodo(item.id);
+									fetchTodoById(item.id);
 								}}>
 								{item.todo}
 							</li>
