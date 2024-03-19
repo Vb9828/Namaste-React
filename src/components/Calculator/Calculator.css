@@ -1,9 +1,11 @@
 .main {
-	border: 2px solid black;
+	border: 2px solid gray;
+	border-radius: 5px;
 	margin: 10px;
 	padding: 10px;
-	box-shadow: 2px 2px 2px;
+	box-shadow: 1px 1px 2px;
 	background-color: #fofofo;
+	width: 500px;
 }
 .input {
 	border: 2px solid black;
